@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Brandentifoi — Fractional Growth Intelligence for European B2B Startups. Strategy, positioning, and data-driven marketing for seed-stage founders." />
+  <title>Brandentifoi | Fractional Growth Intelligence</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --ink:       #0d0d0d;
+      --paper:     #f5f0e8;
+      --cream:     #ede8dc;
+      --gold:      #c9a84c;
+      --gold-lt:   #e8d5a3;
+      --rust:      #b54f2a;
+      --forest:    #2a4a3e;
+      --mist:      #d6cfc2;
+      --white:     #faf8f4;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+      --transition:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Skip link (accessibility) ── */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 16px;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 8px 16px;
+      font-weight: 600;
+      border-radius: 4px;
+      z-index: 9999;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      background: var(--ink) !important;
+      padding: 1.1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+    }
+    .navbar-brand {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold) !important;
+      letter-spacing: 0.02em;
+    }
+    .navbar-brand span {
+      color: var(--white);
+      font-weight: 300;
+    }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mist) !important;
+      padding: 0.4rem 1rem !important;
+      transition: color var(--transition);
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: var(--gold) !important;
+    }
+    .navbar-toggler { border-color: var(--gold); }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c9a84c' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px),
+        linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.14) 0%, transparent 70%);
+    }
+    .hero-circle-1 { width: 600px; height: 600px; top: -150px; right: -100px; }
+    .hero-circle-2 { width: 400px; height: 400px; bottom: -100px; left: 5%; }
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: inline-block;
+      border: 1px solid var(--gold);
+      padding: 4px 12px;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.4s forwards;
+    }
+    .hero-title em {
+      color: var(--gold);
+      font-style: normal;
+      font-weight: 700;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--mist);
+      max-width: 560px;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .hero-ctas {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.85s forwards;
+    }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 0;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-gold:hover, .btn-gold:focus {
+      background: var(--gold-lt);
+      color: var(--ink);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(201,168,76,0.3);
+    }
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border: 1px solid var(--gold);
+      border-radius: 0;
+      transition: all var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline-gold:hover, .btn-outline-gold:focus {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--mist);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s 1.2s forwards;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: var(--gold);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.3); }
+    }
+
+    /* ── Section defaults ── */
+    section { position: relative; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+    .section-title strong { font-weight: 700; }
+
+    /* ── About ── */
+    #about { background: var(--white); padding: 7rem 0; }
+    .about-number {
+      font-family: var(--font-display);
+      font-size: 7rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: -1rem;
+    }
+    .about-lead {
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .about-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 1.5rem 0;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-wrap img {
+      width: 100%;
+      display: block;
+      filter: grayscale(20%) contrast(1.05);
+    }
+    .about-img-border {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: -16px;
+      bottom: -16px;
+      border: 2px solid var(--gold);
+      z-index: 0;
+      pointer-events: none;
+    }
+    .about-img-wrap img { position: relative; z-index: 1; }
+
+    /* ── Services ── */
+    #services { background: var(--paper); padding: 7rem 0; }
+    .service-card {
+      background: var(--white);
+      border-top: 3px solid var(--gold);
+      padding: 2.5rem 2rem;
+      height: 100%;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(13,13,13,0.12);
+    }
+    .service-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .service-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    .service-price {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-top: 1.25rem;
+      display: inline-block;
+      border-bottom: 1px solid var(--gold-lt);
+      padding-bottom: 2px;
+    }
+    .service-list {
+      list-style: none;
+      margin-top: 1rem;
+      padding: 0;
+    }
+    .service-list li {
+      font-size: 0.88rem;
+      padding: 0.35rem 0;
+      padding-left: 1.2rem;
+      position: relative;
+      color: #444;
+    }
+    .service-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.8rem;
+    }
+
+    /* ── Process / How It Works ── */
+    #process { background: var(--ink); padding: 7rem 0; }
+    #process .section-title { color: var(--white); }
+    .process-step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 2rem 0;
+      border-bottom: 1px solid #222;
+    }
+    .process-step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #222;
+      line-height: 1;
+      min-width: 64px;
+      transition: color var(--transition);
+    }
+    .process-step:hover .step-num { color: var(--gold); }
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .step-desc { color: var(--mist); font-size: 0.92rem; }
+
+    /* ── Stats ticker ── */
+    #stats { background: var(--gold); padding: 2rem 0; overflow: hidden; }
+    .ticker-track {
+      display: flex;
+      gap: 3rem;
+      animation: ticker 20s linear infinite;
+      width: max-content;
+    }
+    .ticker-item {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .ticker-item::after { content: '◆'; font-size: 0.5rem; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── ICP / Who It's For ── */
+    #icp { background: var(--white); padding: 7rem 0; }
+    .icp-card {
+      background: var(--paper);
+      border: 1px solid var(--mist);
+      padding: 2rem;
+      height: 100%;
+      transition: border-color var(--transition);
+    }
+    .icp-card:hover { border-color: var(--gold); }
+    .icp-marker {
+      width: 32px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+    .icp-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Testimonial ── */
+    #testimonial { background: var(--forest); padding: 6rem 0; }
+    .quote-mark {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      line-height: 0.6;
+      color: rgba(201,168,76,0.3);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .quote-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.5;
+    }
+    .quote-author {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-top: 2rem;
+      text-transform: uppercase;
+    }
+
+    /* ── Counter section ── */
+    #counter { background: var(--paper); padding: 5rem 0; }
+    .counter-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .counter-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #777;
+      margin-top: 0.5rem;
+    }
+    .counter-divider { width: 1px; background: var(--mist); }
+
+    /* ── Contact ── */
+    #contact { background: var(--ink); padding: 7rem 0; }
+    #contact .section-title { color: var(--white); }
+    #contact .section-label { color: var(--gold); }
+    .contact-form-wrap { background: #161616; padding: 3rem; }
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mist);
+      margin-bottom: 0.4rem;
+    }
+    .form-control, .form-select {
+      background: #1e1e1e;
+      border: 1px solid #333;
+      color: var(--white);
+      border-radius: 0;
+      padding: 0.85rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      transition: border-color var(--transition);
+    }
+    .form-control:focus, .form-select:focus {
+      background: #1e1e1e;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(201,168,76,0.2);
+      color: var(--white);
+    }
+    .form-control::placeholder { color: #555; }
+    .form-select option { background: #1e1e1e; }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+    .contact-info-icon {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+    .contact-info-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+    .contact-info-value {
+      color: var(--white);
+      font-size: 0.9rem;
+    }
+    .form-success {
+      display: none;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    footer { background: #080808; padding: 4rem 0 2rem; }
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: #555;
+      margin-top: 0.25rem;
+    }
+    .footer-nav { list-style: none; padding: 0; }
+    .footer-nav li + li { margin-top: 0.5rem; }
+    .footer-nav a {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: #666;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-nav a:hover, .footer-nav a:focus { color: var(--gold); }
+    .footer-col-title {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+    .footer-bottom {
+      border-top: 1px solid #1a1a1a;
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: #444;
+    }
+    /* ── Imprint ── */
+    #imprint { background: #050505; padding: 3rem 0; border-top: 1px solid #111; }
+    .imprint-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+    .imprint-text {
+      font-size: 0.78rem;
+      color: #444;
+      line-height: 1.8;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Utilities ── */
+    .text-gold { color: var(--gold); }
+    .bg-cream  { background: var(--cream); }
+  </style>
+</head>
+
+<body>
+
+  <!-- Skip navigation for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════
+       HEADER / NAVBAR
+  ══════════════════════════════════════════ -->
+  <header role="banner">
+    <nav class="navbar navbar-expand-lg" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand" href="#hero" aria-label="Brandentifoi homepage">
+          Brandentifoi<span>.</span>
+        </a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNav"
+                aria-controls="mainNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="mainNav">
+          <ul class="navbar-nav gap-1" role="list">
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+            <li class="nav-item"><a class="nav-link" href="#icp">Who It's For</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            <li class="nav-item ms-2">
+              <a class="btn-gold" href="#contact" style="padding:0.6rem 1.2rem;font-size:0.68rem;">
+                Work With Me
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ── HERO ── -->
+    <section id="hero" aria-label="Hero section">
+      <div class="hero-bg-lines" aria-hidden="true"></div>
+      <div class="hero-circle hero-circle-1" aria-hidden="true"></div>
+      <div class="hero-circle hero-circle-2" aria-hidden="true"></div>
+      <div class="container position-relative" style="z-index:1;">
+        <div class="row">
+          <div class="col-lg-10 col-xl-8">
+            <span class="hero-tag">Fractional Growth Intelligence</span>
+            <h1 class="hero-title">
+              Your startup's<br />
+              <em>strategic brain</em><br />
+              on demand.
+            </h1>
+            <p class="hero-sub">
+              Brandentifoi embeds into seed-stage B2B SaaS teams as a fractional growth partner — bringing positioning, pipeline intelligence, and data-driven marketing without a full-time hire.
+            </p>
+            <div class="hero-ctas">
+              <a href="#services" class="btn-gold" aria-label="View Brandentifoi service packages">
+                See Packages
+              </a>
+              <a href="#contact" class="btn-outline-gold" aria-label="Get in touch with Brandentifoi">
+                Book a Discovery Call
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ── STATS TICKER ── -->
+    <section id="stats" aria-label="Key statistics" aria-hidden="true">
+      <div class="ticker-track">
+        <!-- Duplicated for seamless loop -->
+        <span class="ticker-item">350+ Seed Startups Targeted</span>
+        <span class="ticker-item">Station F Ecosystem</span>
+        <span class="ticker-item">B2B SaaS &amp; AI Focus</span>
+        <span class="ticker-item">Europe-First Strategy</span>
+        <span class="ticker-item">Data-Driven Positioning</span>
+        <span class="ticker-item">No Full-Time Headcount</span>
+        <span class="ticker-item">350+ Seed Startups Targeted</span>
+        <span class="ticker-item">Station F Ecosystem</span>
+        <span class="ticker-item">B2B SaaS &amp; AI Focus</span>
+        <span class="ticker-item">Europe-First Strategy</span>
+        <span class="ticker-item">Data-Driven Positioning</span>
+        <span class="ticker-item">No Full-Time Headcount</span>
+      </div>
+    </section>
+
+    <!-- ── ABOUT ── -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="container py-5">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 reveal">
+            <div class="section-label">About</div>
+            <h2 id="about-heading" class="section-title mb-4">
+              Growth strategy that<br /><strong>scales with you.</strong>
+            </h2>
+            <div class="about-divider"></div>
+            <p class="about-lead mb-3">
+              Brandentifoi is a fractional growth intelligence practice built for European seed-stage B2B founders who need senior marketing thinking without the cost of a full-time CMO.
+            </p>
+            <p style="color:#555;font-size:0.92rem;">
+              Founded by <strong>Shilba Xavier</strong> — an M1 Digital Marketing &amp; Data Analytics student at emlyon Business School Paris with 3+ years of B2B SaaS, ABM, and growth marketing experience across India and Europe — Brandentifoi operates at the intersection of brand strategy, go-to-market design, and commercial intelligence.
+            </p>
+            <p style="color:#555;font-size:0.92rem;margin-top:1rem;">
+              The methodology layers Discovery → Diagnostic → Strategy → Execution into a repeatable system that adapts to your stage, ICP, and runway.
+            </p>
+          </div>
+          <div class="col-lg-5 offset-lg-1 reveal">
+            <div class="about-img-wrap">
+              <!-- Placeholder illustration representing a strategic framework -->
+              <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format"
+                alt="Strategic planning session showing a team collaborating around data charts and a whiteboard — representing Brandentifoi's collaborative growth methodology"
+                width="600"
+                height="450"
+                style="object-fit:cover;max-height:420px;"
+              />
+              <div class="about-img-border" aria-hidden="true"></div>
+            </div>
+            <!-- Image credit -->
+            <p style="font-size:0.65rem;color:#aaa;margin-top:2.5rem;">
+              Image: Unsplash / Campaign Creators
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SERVICES ── -->
+    <section id="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-8 reveal">
+            <div class="section-label">Services</div>
+            <h2 id="services-heading" class="section-title">
+              Three packages.<br /><strong>One system.</strong>
+            </h2>
+          </div>
+        </div>
+        <div class="row g-4">
+
+          <!-- Package 1 -->
+          <div class="col-lg-4 reveal">
+            <article class="service-card" aria-labelledby="service1-title">
+              <div class="service-num" aria-hidden="true">01</div>
+              <h3 id="service1-title" class="service-title">Brand Diagnostic Sprint</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                A rapid 2-week audit of your positioning, messaging, ICP clarity, and competitive landscape — delivered as an actionable intelligence brief.
+              </p>
+              <ul class="service-list" aria-label="Package 1 deliverables">
+                <li>ICP &amp; persona mapping</li>
+                <li>Competitive positioning matrix</li>
+                <li>Messaging audit &amp; gap analysis</li>
+                <li>90-day quick-win roadmap</li>
+              </ul>
+              <span class="service-price" aria-label="Starting price">From €1,200</span>
+            </article>
+          </div>
+
+          <!-- Package 2 -->
+          <div class="col-lg-4 reveal" style="transition-delay:0.1s;">
+            <article class="service-card" aria-labelledby="service2-title" style="border-top-color:var(--rust);">
+              <div class="service-num" aria-hidden="true">02</div>
+              <h3 id="service2-title" class="service-title">GTM Activation Program</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                A 6-week embedded engagement to design and launch your go-to-market motion — from channel strategy to first pipeline signals.
+              </p>
+              <ul class="service-list" aria-label="Package 2 deliverables">
+                <li>Full GTM strategy document</li>
+                <li>ABM target account list (300+ accounts)</li>
+                <li>Content &amp; SEO foundation</li>
+                <li>Lead scoring &amp; CRM setup</li>
+                <li>Weekly progress reports</li>
+              </ul>
+              <span class="service-price" aria-label="Starting price" style="color:var(--rust);border-color:var(--rust);">From €3,500</span>
+            </article>
+          </div>
+
+          <!-- Package 3 -->
+          <div class="col-lg-4 reveal" style="transition-delay:0.2s;">
+            <article class="service-card" aria-labelledby="service3-title" style="border-top-color:var(--forest);">
+              <div class="service-num" aria-hidden="true">03</div>
+              <h3 id="service3-title" class="service-title">Fractional CMO Retainer</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                Ongoing strategic leadership — a senior growth partner embedded in your team on a monthly retainer, without the full-time cost.
+              </p>
+              <ul class="service-list" aria-label="Package 3 deliverables">
+                <li>Weekly strategy calls</li>
+                <li>Full marketing function ownership</li>
+                <li>Data analytics &amp; dashboard reporting</li>
+                <li>Investor narrative support</li>
+                <li>Hiring &amp; vendor briefing</li>
+              </ul>
+              <span class="service-price" aria-label="Starting price" style="color:var(--forest);border-color:var(--forest);">From €2,200 / month</span>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROCESS ── -->
+    <section id="process" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 reveal">
+            <div class="section-label" style="color:var(--gold);">How It Works</div>
+            <h2 id="process-heading" class="section-title" style="color:var(--white);">
+              A system built<br /><strong style="color:var(--gold);">for founders.</strong>
+            </h2>
+            <p style="color:var(--mist);margin-top:1.5rem;font-size:0.92rem;max-width:360px;">
+              Every engagement follows a four-phase intelligence loop — designed to reduce ambiguity fast and move from insight to execution within weeks, not quarters.
+            </p>
+          </div>
+          <div class="col-lg-6 offset-lg-1 mt-5 mt-lg-0 reveal">
+            <div class="process-step" role="listitem">
+              <span class="step-num" aria-hidden="true">01</span>
+              <div>
+                <div class="step-title">Discovery</div>
+                <p class="step-desc">Deep-dive into your business model, market, and growth blockers. No templates — tailored diagnostics.</p>
+              </div>
+            </div>
+            <div class="process-step" role="listitem">
+              <span class="step-num" aria-hidden="true">02</span>
+              <div>
+                <div class="step-title">Diagnostic</div>
+                <p class="step-desc">Data analysis, competitive intelligence, ICP scoring, and positioning gap identification.</p>
+              </div>
+            </div>
+            <div class="process-step" role="listitem">
+              <span class="step-num" aria-hidden="true">03</span>
+              <div>
+                <div class="step-title">Strategy</div>
+                <p class="step-desc">A prioritised, time-boxed growth roadmap with channel bets, messaging frameworks, and KPIs.</p>
+              </div>
+            </div>
+            <div class="process-step" role="listitem">
+              <span class="step-num" aria-hidden="true">04</span>
+              <div>
+                <div class="step-title">Execution</div>
+                <p class="step-desc">Hands-on activation — content, ABM campaigns, CRM logic, and analytics dashboards built and shipped.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── COUNTERS ── -->
+    <section id="counter" aria-label="Key metrics">
+      <div class="container">
+        <div class="row text-center g-4">
+          <div class="col-6 col-lg-3 reveal">
+            <div class="counter-num" data-target="300" aria-label="300 plus ABM accounts managed">0+</div>
+            <div class="counter-label">ABM Accounts Managed</div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="transition-delay:0.1s;">
+            <div class="counter-num" data-target="3" aria-label="3 plus years of experience">0+</div>
+            <div class="counter-label">Years B2B Experience</div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="transition-delay:0.2s;">
+            <div class="counter-num" data-target="350" aria-label="350 plus startups in target ecosystem">0+</div>
+            <div class="counter-label">Startups in Target ICP</div>
+          </div>
+          <div class="col-6 col-lg-3 reveal" style="transition-delay:0.3s;">
+            <div class="counter-num" data-target="4" aria-label="4 week average time to first deliverable">0</div>
+            <div class="counter-label">Weeks to First Deliverable</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── WHO IT'S FOR ── -->
+    <section id="icp" aria-labelledby="icp-heading">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-7 reveal">
+            <div class="section-label">Who It's For</div>
+            <h2 id="icp-heading" class="section-title">
+              Built for the <strong>builder</strong><br />who can't wait.
+            </h2>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <article class="icp-card" aria-labelledby="icp1-title">
+              <div class="icp-marker" aria-hidden="true"></div>
+              <h3 id="icp1-title" class="icp-title">Founder-Led Startups</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                Seed-stage SaaS or AI startups at Station F and similar ecosystems where the founder is still the de facto head of marketing.
+              </p>
+            </article>
+          </div>
+          <div class="col-md-4 reveal" style="transition-delay:0.1s;">
+            <article class="icp-card" aria-labelledby="icp2-title">
+              <div class="icp-marker" aria-hidden="true"></div>
+              <h3 id="icp2-title" class="icp-title">Pre-PMF Teams</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                Companies still validating ICP and messaging who need structured thinking before scaling ad spend or hiring a full marketing team.
+              </p>
+            </article>
+          </div>
+          <div class="col-md-4 reveal" style="transition-delay:0.2s;">
+            <article class="icp-card" aria-labelledby="icp3-title">
+              <div class="icp-marker" aria-hidden="true"></div>
+              <h3 id="icp3-title" class="icp-title">European B2B Scaleups</h3>
+              <p style="font-size:0.88rem;color:#555;">
+                Post-seed companies expanding into new markets — especially those targeting North America or EMEA — who need senior GTM support without full-time overhead.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIAL ── -->
+    <section id="testimonial" aria-labelledby="testimonial-heading">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center reveal">
+            <span class="quote-mark" aria-hidden="true">"</span>
+            <h2 id="testimonial-heading" class="visually-hidden">Client testimonial</h2>
+            <blockquote>
+              <p class="quote-text">
+                Brandentifoi didn't just hand us a strategy deck — they helped us understand who we were actually selling to, then built the system to reach them.
+              </p>
+              <footer class="quote-author">
+                — Pilot Client, Seed-Stage SaaS · Paris, France
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONTACT FORM ── -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4 reveal">
+            <div class="section-label">Contact</div>
+            <h2 id="contact-heading" class="section-title">
+              Let's build<br /><strong style="color:var(--gold);">together.</strong>
+            </h2>
+            <p style="color:var(--mist);margin-top:1.5rem;font-size:0.92rem;">
+              Whether you need a quick diagnostic or a long-term growth partner, the first step is a 30-minute discovery call — free, no pitch.
+            </p>
+            <div style="margin-top:3rem;">
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">E</div>
+                <div>
+                  <div class="contact-info-label">Email</div>
+                  <a href="mailto:shilbajr15@gmail.com" class="contact-info-value" style="text-decoration:none;color:var(--white);">
+                    shilbajr15@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">T</div>
+                <div>
+                  <div class="contact-info-label">Phone</div>
+                  <a href="tel:+330630644853" class="contact-info-value" style="text-decoration:none;color:var(--white);">
+                    +33 06 30 64 48 53
+                  </a>
+                </div>
+              </div>
+              <div class="contact-info-item">
+                <div class="contact-info-icon" aria-hidden="true">in</div>
+                <div>
+                  <div class="contact-info-label">LinkedIn</div>
+                  <a href="https://linkedin.com/in/shilba-xavier" target="_blank" rel="noopener noreferrer"
+                     class="contact-info-value" style="text-decoration:none;color:var(--white);"
+                     aria-label="Shilba Xavier LinkedIn profile (opens in new tab)">
+                    linkedin.com/in/shilba-xavier
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-7 offset-lg-1 reveal">
+            <div class="contact-form-wrap">
+              <form id="contactForm" novalidate aria-label="Contact and discovery call request form">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label for="firstName" class="form-label">
+                      First Name <span aria-label="required" style="color:var(--gold);">*</span>
+                    </label>
+                    <input type="text" id="firstName" name="firstName" class="form-control"
+                           placeholder="Marie" required aria-required="true" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="lastName" class="form-label">
+                      Last Name <span aria-label="required" style="color:var(--gold);">*</span>
+                    </label>
+                    <input type="text" id="lastName" name="lastName" class="form-control"
+                           placeholder="Dupont" required aria-required="true" />
+                  </div>
+                  <div class="col-12">
+                    <label for="email" class="form-label">
+                      Work Email <span aria-label="required" style="color:var(--gold);">*</span>
+                    </label>
+                    <input type="email" id="email" name="email" class="form-control"
+                           placeholder="marie@yourstartup.com" required aria-required="true" />
+                  </div>
+                  <div class="col-12">
+                    <label for="company" class="form-label">Company / Startup Name</label>
+                    <input type="text" id="company" name="company" class="form-control"
+                           placeholder="Acme SaaS" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="stage" class="form-label">Funding Stage</label>
+                    <select id="stage" name="stage" class="form-select" aria-label="Select your company's funding stage">
+                      <option value="" disabled selected>Select stage</option>
+                      <option value="pre-seed">Pre-Seed / Bootstrapped</option>
+                      <option value="seed">Seed</option>
+                      <option value="seriesA">Series A</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="service" class="form-label">Interested In</label>
+                    <select id="service" name="service" class="form-select" aria-label="Select the service you are interested in">
+                      <option value="" disabled selected>Select package</option>
+                      <option value="diagnostic">Brand Diagnostic Sprint</option>
+                      <option value="gtm">GTM Activation Program</option>
+                      <option value="retainer">Fractional CMO Retainer</option>
+                      <option value="unsure">Not Sure Yet</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="message" class="form-label">
+                      Your Biggest Growth Challenge <span aria-label="required" style="color:var(--gold);">*</span>
+                    </label>
+                    <textarea id="message" name="message" class="form-control" rows="4"
+                              placeholder="Tell me what's blocking your growth right now..."
+                              required aria-required="true"></textarea>
+                  </div>
+                  <div class="col-12 mt-2">
+                    <button type="submit" class="btn-gold w-100" style="padding:1rem;cursor:pointer;"
+                            aria-label="Submit contact form and request a discovery call">
+                      Request Discovery Call →
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div class="form-success" id="formSuccess" role="alert" aria-live="polite">
+                Message received — I will be in touch within 24 hours.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- end #main-content -->
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="footer-brand" aria-label="Brandentifoi">Brandentifoi.</div>
+          <p class="footer-tagline">Fractional Growth Intelligence for European B2B Startups.</p>
+          <p style="font-size:0.78rem;color:#444;margin-top:1rem;max-width:300px;">
+            Helping seed-stage founders build the marketing infrastructure that earns their next round.
+          </p>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-2">
+          <div class="footer-col-title">Navigation</div>
+          <ul class="footer-nav" role="list" aria-label="Footer navigation">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#icp">Who It's For</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-nav" role="list" aria-label="Services links">
+            <li><a href="#services">Brand Diagnostic</a></li>
+            <li><a href="#services">GTM Activation</a></li>
+            <li><a href="#services">Fractional CMO</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <div class="footer-col-title">Connect</div>
+          <ul class="footer-nav" role="list" aria-label="External links">
+            <li>
+              <a href="https://linkedin.com/in/shilba-xavier" target="_blank" rel="noopener noreferrer"
+                 aria-label="LinkedIn profile (opens in new tab)">LinkedIn</a>
+            </li>
+            <li>
+              <a href="https://github.com/shilba98" target="_blank" rel="noopener noreferrer"
+                 aria-label="GitHub profile (opens in new tab)">GitHub</a>
+            </li>
+            <li>
+              <a href="mailto:shilbajr15@gmail.com" aria-label="Send email to Brandentifoi">Email</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col">
+            <p class="footer-copy">
+              © 2026 Brandentifoi · Shilba Xavier · All rights reserved ·
+              <a href="#imprint" style="color:#555;text-decoration:none;">Imprint</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── IMPRINT ── -->
+  <section id="imprint" aria-labelledby="imprint-heading">
+    <div class="container">
+      <h2 id="imprint-heading" class="imprint-title">Imprint / Legal Notice</h2>
+      <div class="row">
+        <div class="col-lg-8">
+          <p class="imprint-text">
+            <strong style="color:#666;">Service Provider:</strong> Shilba Xavier trading as Brandentifoi<br />
+            <strong style="color:#666;">Address:</strong> Paris, Île-de-France, France<br />
+            <strong style="color:#666;">Contact:</strong>
+            <a href="mailto:shilbajr15@gmail.com" style="color:#555;">shilbajr15@gmail.com</a> ·
+            <a href="tel:+330630644853" style="color:#555;">+33 06 30 64 48 53</a><br />
+            <strong style="color:#666;">LinkedIn:</strong>
+            <a href="https://linkedin.com/in/shilba-xavier" target="_blank" rel="noopener noreferrer" style="color:#555;">
+              linkedin.com/in/shilba-xavier
+            </a><br /><br />
+            <strong style="color:#666;">Legal Status:</strong> Sole Trader / Auto-entrepreneur (portage salarial via Jump)<br />
+            <strong style="color:#666;">Responsible for Content:</strong> Shilba Xavier<br />
+            <strong style="color:#666;">Dispute Resolution:</strong> The European Commission provides an Online Dispute Resolution (ODR) platform at
+            <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer" style="color:#555;">
+              ec.europa.eu/consumers/odr
+            </a>.<br /><br />
+            <strong style="color:#666;">Image Credits:</strong> Hero and About section imagery sourced from Unsplash under the Unsplash License (free for commercial use, no attribution required). Full credits: Campaign Creators (Unsplash).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    /* ── Scroll Reveal ── */
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    /* ── Animated Counters ── */
+    function animateCounter(el, target, duration = 1800) {
+      const suffix = el.textContent.includes('+') ? '+' : '';
+      let start = 0;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+          el.textContent = target + suffix;
+          clearInterval(timer);
+        } else {
+          el.textContent = Math.floor(start) + suffix;
+        }
+      }, 16);
+    }
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const hasSuffix = el.textContent.includes('+');
+          animateCounter(el, target);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter-num[data-target]').forEach(el => counterObserver.observe(el));
+
+    /* ── Active nav link highlight on scroll ── */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 100;
+        if (window.scrollY >= top) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'true');
+        }
+      });
+    }, { passive: true });
+
+    /* ── Contact Form ── */
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      // Simulate async send
+      setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'block';
+        this.reset();
+        btn.textContent = 'Request Discovery Call →';
+        btn.disabled = false;
+        // Scroll success into view
+        document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 1200);
+    });
+
+    /* ── Navbar shrink on scroll ── */
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        navbar.style.padding = '0.6rem 0';
+      } else {
+        navbar.style.padding = '1.1rem 0';
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
